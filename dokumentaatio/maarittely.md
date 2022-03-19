@@ -10,13 +10,13 @@
 Kurssia varten toteutan RSA-salaamiseen kykenevän ohjelman, joka luo riittävän pitkiä (1024 bittiä) avaimia ja kykenee käyttämään niitä viestien salaamiseen ja purkamiseen. Tarkoituksena on ensisijaisesti perehtyä RSA-salausmenetelmään ja sen vaatimiin algoritmeihin, joten esimerkiksi avainten hallintaa ei toteuteta tietoturvan näkökulmasta.
 
 ## Algoritmit ja tietorakenteet
-Työssä toteutetaan RSA-avaimia generoiva algoritmi siihen liittyvine lauseineen (Eukleideen algoritmi, Fermat'n pieni lause, jakoyhtälö). 
+Työssä toteutetaan RSA-avaimia generoiva algoritmi siihen liittyvine lauseineen (Eukleideen algoritmi, Fermat'n pieni lause, jakoyhtälö). Projekti ei tarvitse muita tietorakenteita kuin yksittäisiä muuttujia, joilla avaimet luodaan.  
 
 ## Syötteet ja käyttöliittymä
-Ohjelmalle toteutetaan suomenkielinen komentorivikäyttöliittymä. Ohjelma ottaa syötteeksi tarvittavat alkuluvut ym. käyttäjältä ja varmistaa niiden oikeellisuuden ja pituusvaatimuksen täyttymisen. 
+Ohjelmalle toteutetaan suomenkielinen komentorivikäyttöliittymä. Ohjelma generoi avainten luomiseen tarvittavat alkuluvut itse ilman käyttjän syötettä. Käyttäjä syöttää salattavan tai purettavan viestin. 
 
 ## Tavoitteena olevat aika- ja tilavaativuudet
-Toteutuksen tavoitteena on saada salaukselle ja purkamiselle tehokkuus O(1) ja O(k), avaimen koosta riippuen. Avainten luominen on oletettavasti hitaampi operaatio. 
+Toteutuksen tavoitteena on saada salaukselle ja purkamiselle tehokkuus O(1) ja O(k), avaimen koosta riippuen. Avainten luominen on oletettavasti hitaampi operaatio. Päivitän tarvittavien algoritmien aika- ja tilavaatimukset tähän ohjelman toteutuksen edetessä. 
 
 ## Lähteet
 
