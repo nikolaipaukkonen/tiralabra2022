@@ -3,4 +3,5 @@
 |:--:	| :------------	| :------------	|
 |18.3.	| 2		| Määrittelydokumentin kirjoittaminen ja aiheeseen perehtyminen |
 |19.3.	| 3		| Lisää projektin alustamista ja aiheesta lukemista 		|
-|Yht.	| 5		|	|
+|21.3	| 5		| Aloitettu prime_tools.py:n teko				|
+|Yht.	| 10		|	|
