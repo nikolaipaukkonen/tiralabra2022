@@ -1,9 +1,19 @@
 import random
 
 def random_seed(size_in_bits):
+    """Luo siemenluvun jolla alkuluku generoidaan
+    
+    Args:
+        size_in_bits: Luvun koko bitteinä.
+    """
     return (random.randrange(2**(size_in_bits-1)+1, 2**size_in_bits-1))
 
 def sieve_of_erastothenes(amount):
+    """Erastotheneen seula pienten alkulukujen luontiin
+    
+    Args:
+        amount: Kuinka monta alkulukua luodaan.
+    """
     primes = []
 
     prime = [True for i in range(amount+1)]
@@ -21,6 +31,11 @@ def sieve_of_erastothenes(amount):
     return primes
 
 def easy_possible_prime(size_in_bits):
+    """Helppo mahdollisen alkuluvun luonti ja tarkistus
+    
+    Args:
+        size_in_bits: luvun koko bitteinä    
+    """
     easy_primes = sieve_of_erastothenes(1500)
 
     while True:
@@ -33,7 +48,11 @@ def easy_possible_prime(size_in_bits):
                 return possible_prime
 
 def rabin_miller(possible_prime):
-    # riittääkö että on todennäköisesti alkuluku?
+    """Rabin-Millerin testi mahdolliselle alkuluvulle
+    
+    Args:
+        possible_prime: Testattava luku
+    """
     maxDivisions = 0
     evenPossible = possible_prime - 1
 
@@ -59,6 +78,11 @@ def rabin_miller(possible_prime):
     return True
 
 def generate_prime(size_in_bits):
+    """Alkulukugeneraattori, joka kutsuu muita luokan metodeja
+    
+    Args:
+        size_in_bits: generoitavan alkuluvun koko.
+    """
     while True:
         possible_prime = easy_possible_prime(size_in_bits)
         if not rabin_miller(possible_prime):

@@ -1,0 +1,9 @@
+.coverage
+htmlcov
+*.pyc
+/src/__pycache__/
+/src/tests/__pycache__/
+/src/tests/.pytest_cache/
+/src/.pytest_cache
+src/sovelluslogiikka/__pycache__/
+src/ui/__pycache__/
