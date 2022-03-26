@@ -1,91 +1,94 @@
 import random
 
-def random_seed(size_in_bits):
-    """Luo siemenluvun jolla alkuluku generoidaan
-    
-    Args:
-        size_in_bits: Luvun koko bitteinä.
-    """
-    return (random.randrange(2**(size_in_bits-1)+1, 2**size_in_bits-1))
+class Prime_tools:
+    def __init__(self, size_in_bits):
+        self.__size_in_bits = size_in_bits
 
-def sieve_of_erastothenes(amount):
-    """Erastotheneen seula pienten alkulukujen luontiin
-    
-    Args:
-        amount: Kuinka monta alkulukua luodaan.
-    """
-    primes = []
+    def random_seed(self, size_in_bits):
+        """Luo siemenluvun jolla alkuluku generoidaan
 
-    prime = [True for i in range(amount+1)]
-    p = 2
-    while (p * p <= amount):
-        if (prime[p] == True):
-            for i in range(p*p, amount+1,p):
-                prime[i] = False
-            p += 1
+        Args:
+            size_in_bits: Luvun koko bitteinä.
+        """
+        return (random.randrange(2**(size_in_bits-1)+1, 2**size_in_bits-1))
 
-        for p in range(2, amount+1):
-            if prime[p]:
-                primes.append(p)
+    def sieve_of_erastothenes(self,amount):
+        """Erastotheneen seula pienten alkulukujen luontiin
 
-    return primes
+        Args:
+            amount: Kuinka monta alkulukua luodaan.
+        """
+        primes = []
 
-def easy_possible_prime(size_in_bits):
-    """Helppo mahdollisen alkuluvun luonti ja tarkistus
-    
-    Args:
-        size_in_bits: luvun koko bitteinä    
-    """
-    easy_primes = sieve_of_erastothenes(1500)
+        prime = [True for i in range(amount+1)]
+        p = 2
+        while p * p <= amount:
+            if prime[p] is True:
+                for i in range(p*p, amount+1,p):
+                    prime[i] = False
+                p += 1
 
-    while True:
-        possible_prime = random_seed(size_in_bits)
+            for p in range(2, amount+1):
+                if prime[p]:
+                    primes.append(p)
 
-        for factor in easy_primes:
-            if possible_prime % factor == 0 and factor**2 <= possible_prime:
-                break
-            else: 
-                return possible_prime
+        return primes
 
-def rabin_miller(possible_prime):
-    """Rabin-Millerin testi mahdolliselle alkuluvulle
-    
-    Args:
-        possible_prime: Testattava luku
-    """
-    maxDivisions = 0
-    evenPossible = possible_prime - 1
+    def easy_possible_prime(self,size_in_bits):
+        """Helppo mahdollisen alkuluvun luonti ja tarkistus
 
-    while evenPossible % 2 == 0:
-        evenPossible >>= 1
-        maxDivisions += 1
-    assert(2**maxDivisions * evenPossible == possible_prime - 1)
+        Args:
+            size_in_bits: luvun koko bitteinä.
+        """
+        easy_primes = self.sieve_of_erastothenes(1500)
 
-    def testPart(testable):
-        if pow(testable, evenPossible, possible_prime) == 1:
-            return False
+        while True:
+            possible_prime = self.random_seed(size_in_bits)
 
-        for i in range(maxDivisions):
-            if pow(testable, 2**i * evenPossible, possible_prime) == possible_prime - 1:
-                return False
-            return True
-
-    amountOfTests = 10 # kasvata todennäköisyyttä
-    for i in range(amountOfTests): 
-        testable = random.randrange(2, possible_prime)
-        if testPart(testable):
-            return False
-    return True
-
-def generate_prime(size_in_bits):
-    """Alkulukugeneraattori, joka kutsuu muita luokan metodeja
-    
-    Args:
-        size_in_bits: generoitavan alkuluvun koko.
-    """
-    while True:
-        possible_prime = easy_possible_prime(size_in_bits)
-        if not rabin_miller(possible_prime):
-            continue
-        else:
+            for factor in easy_primes:
+                if possible_prime % factor == 0 and factor**2 <= possible_prime:
+                    break
             return possible_prime
+
+    def rabin_miller(self,possible_prime):
+        """Rabin-Millerin testi mahdolliselle alkuluvulle
+
+        Args:
+            possible_prime: Testattava luku
+        """
+        maxDivisions = 0
+        evenPossible = possible_prime - 1
+
+        while evenPossible % 2 == 0:
+            evenPossible >>= 1
+            maxDivisions += 1
+        assert(2**maxDivisions * evenPossible == possible_prime - 1)
+
+        def testPart(testable):
+            if pow(testable, evenPossible, possible_prime) == 1:
+                return False
+
+            for i in range(maxDivisions):
+                if pow(testable, 2**i * evenPossible, possible_prime) == possible_prime - 1:
+                    return False
+                return True
+
+        amountOfTests = 10 # kasvata todennäköisyyttä
+        for i in range(amountOfTests):
+            testable = random.randrange(2, possible_prime)
+            if testPart(testable):
+                return False
+        return True
+
+    def generate_prime(self):
+        """Alkulukugeneraattori, joka kutsuu muita luokan metodeja
+
+        Args:
+            size_in_bits: generoitavan alkuluvun koko.
+        """
+        while True:
+            possible_prime = self.easy_possible_prime(self.__size_in_bits)
+            if not self.rabin_miller(possible_prime):
+                continue
+            else:
+                return possible_prime
