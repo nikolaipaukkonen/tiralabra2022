@@ -1,5 +1,5 @@
 import unittest
-from src.sovelluslogiikka.prime_tools import Prime_tools
+from sovelluslogiikka.prime_tools import Prime_tools
 
 class TestPrime_tools(unittest.TestCase):
     def setUp(self):

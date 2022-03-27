@@ -1,4 +1,5 @@
 import random
+from sovelluslogiikka.math_tools import gcd
 
 class Prime_tools:
     def __init__(self, size_in_bits):
@@ -92,3 +93,54 @@ class Prime_tools:
                 continue
             else:
                 return possible_prime
+
+    def phi(self,p, q):
+        return ((p-1)*(q-1))
+
+    def luo_avain(self):
+        """Generoi avainparin. kesken. Tullaan eriyttämään erillisiksi
+        osiksi.
+
+        """
+        print(self.__size_in_bits)
+        p = self.generate_prime()
+        q = self.generate_prime()
+
+        while p == q:
+            q = self.generate_prime()
+
+        n = p * q
+        ph = self.phi(p,q)
+        e = 65537
+
+        while gcd(e, ph) != 1:
+            p, q = self.generate_prime(), self.generate_prime()
+            ph = self.phi(p, q)
+
+        d = 0
+
+        P = (e, n)
+        S = (d, n)
+
+        print("p:", p)
+        print("q:", q)
+        print("Julkisen avaimen ensimmäinen osa: ", n)
+        print("phi:", ph)
+        print("S:", S)
+        print("P:", P)
+
+    def salaa(self,viesti):
+        """Salaa syötetyn viestin käyttäen avainparia. Kesken.
+
+        Args:
+            viesti: Salattava viesti.
+        """
+        return viesti
+
+    def pura(self,viesti):
+        """Purkaa syötetyn viestin käyttäen avainparia. Kesken.
+
+        Args:
+            viesti: Purettava viesti.
+        """
+        return viesti

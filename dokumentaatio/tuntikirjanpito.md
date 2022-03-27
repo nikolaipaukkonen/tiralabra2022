@@ -6,4 +6,5 @@
 |21.3	| 5		| Aloitettu prime_tools.py:n teko				|
 |22.3.	| 4		| Alustettu testit, lint ja aloitettu kommentointi		|
 |26.3.  | 5     | Aloitettu ui:n tekeminen.         |
-|Yht.	| 19		|	|
+|27.3.  | 6     | Sovelluslogiikka, ui ja gcd   |
+|Yht.	| 25		|	|

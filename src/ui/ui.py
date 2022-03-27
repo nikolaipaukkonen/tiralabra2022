@@ -5,7 +5,8 @@ class UI:
     def __init__(self):
         syote = int(input("Syötä salausavaimen pituus bitteinä (oletus 1024):"))
         self.key_len = syote if syote >= 1024 else 1024
-        self.__prime_tools = Prime_tools(1024)
+        self.__prime_tools = Prime_tools(self.key_len)
+        self.avain_on = 0
 
     def start(self):
         """Aloittaa käyttöliittymän
@@ -17,9 +18,10 @@ class UI:
         """Tulostaa vaihtoehdot ja kysyy syötteen.
         
         """
-        print("[1] Luo uusi avain\n[2] Vie avain\n[3] Tuo avain \n[4] Salaa viesti \n[5] Pura viesti")
-        valinta = input(":::")
-        self.toiminto(valinta)
+        while(True):
+            print("[1] Luo uusi avain\n[2] Vie avain\n[3] Tuo avain \n[4] Salaa viesti \n[5] Pura viesti")
+            valinta = input(":::")
+            self.toiminto(valinta)
 
     def toiminto(self, valinta):
         """Toiminnon valinta.
@@ -28,11 +30,25 @@ class UI:
             valinta: Valittu toiminto.
         """
         if (valinta == "1"):
-            self.luo_avain()
+            self.__prime_tools.luo_avain()
+            self.avain_on = 1
         elif (valinta == "2"):
             self.vie()
         elif (valinta == "3"):
             self.tuo()
+        elif (valinta == "4"):
+            if (self.avain_on):
+                salattava = input("Syötä salattava viesti:")
+                print(self.__prime_tools.salaa(salattava))
+            else:
+                print("Ei salausavainta!")
+        elif (valinta == "5"):
+            if (self.avain_on):
+                purettava = input("Syötä purettava viesti:")
+                print(self.__prime_tools.pura(purettava))
+            else:
+                print("Ei purkuavainta!")
+
 
     def tuo(self):
         #tbd   
@@ -41,17 +57,3 @@ class UI:
     def vie(self):
         #tbd
         return 0
-
-    def luo_avain(self):
-        """Generoi avainparin. wip: nyt luo vain p, q ja n."""
-        print(self.key_len)
-        p = self.__prime_tools.generate_prime()
-        q = self.__prime_tools.generate_prime()
-
-        while(p == q):
-            q = self.__prime_tools.generate_prime()
-
-        n = p * q
-        print("p:", p)
-        print("q:", q)
-        print("Julkisen avaimen ensimmäinen osa: ", n)
