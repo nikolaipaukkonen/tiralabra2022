@@ -11,4 +11,4 @@ Toteutan RSA-salausavainten luomisen ja käytön mahdollistavan ohjelman. Osa Ti
 ## Viikkoraportit
 * [Viikko 1](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_1.md)
 * [Viikko 2](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_2.md)
-
+* [Viikko 3](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_3.md)
