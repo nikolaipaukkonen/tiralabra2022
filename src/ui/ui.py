@@ -1,5 +1,6 @@
 #from sovelluslogiikka.math_tools import Math_tools
 from sovelluslogiikka.prime_tools import Prime_tools
+import sys
 
 class UI:
     def __init__(self):
@@ -19,8 +20,8 @@ class UI:
         
         """
         while(True):
-            print("[1] Luo uusi avain\n[2] Vie avain\n[3] Tuo avain \n[4] Salaa viesti \n[5] Pura viesti")
-            valinta = input(":::")
+            print("[1] Luo uusi avain\n[2] Vie avain\n[3] Tuo avain \n[4] Salaa viesti \n[5] Pura viesti \n[6] Poistu")
+            valinta = input("::: ")
             self.toiminto(valinta)
 
     def toiminto(self, valinta):
@@ -48,6 +49,8 @@ class UI:
                 print(self.__prime_tools.pura(purettava))
             else:
                 print("Ei purkuavainta!")
+        elif (valinta == "6"):
+            sys.exit(0)
 
 
     def tuo(self):

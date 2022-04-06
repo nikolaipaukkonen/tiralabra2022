@@ -1,5 +1,5 @@
 import random
-from sovelluslogiikka.math_tools import gcd
+from sovelluslogiikka.math_tools import gcd, calculate_d
 
 class Prime_tools:
     def __init__(self, size_in_bits):
@@ -117,17 +117,21 @@ class Prime_tools:
             p, q = self.generate_prime(), self.generate_prime()
             ph = self.phi(p, q)
 
-        d = 0
+        d = calculate_d(e, ph)
 
         P = (e, n)
         S = (d, n)
 
+        #testailua
         print("p:", p)
         print("q:", q)
         print("Julkisen avaimen ensimmäinen osa: ", n)
         print("phi:", ph)
+        print("d: ", d)
         print("S:", S)
         print("P:", P)
+
+        return [P, S]
 
     def salaa(self,viesti):
         """Salaa syötetyn viestin käyttäen avainparia. Kesken.
