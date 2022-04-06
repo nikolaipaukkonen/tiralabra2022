@@ -7,4 +7,5 @@
 |22.3.	| 4		| Alustettu testit, lint ja aloitettu kommentointi		|
 |26.3.  | 5     | Aloitettu ui:n tekeminen.         |
 |27.3.  | 6     | Sovelluslogiikka, ui ja gcd   |
-|Yht.	| 25		|	|
+|6.4. 	| 4	| Sovelluslogiikkaa (d:n laskeminen) |
+|Yht.	| 29		|	|
