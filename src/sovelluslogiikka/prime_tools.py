@@ -1,9 +1,12 @@
 import random
-from sovelluslogiikka.math_tools import gcd, calculate_d
+from sovelluslogiikka.math_tools import gcd, calculate_d, string_to_int, int_to_string
 
 class Prime_tools:
     def __init__(self, size_in_bits):
         self.__size_in_bits = size_in_bits
+        self.d = 0
+        self.e = 0
+        self.n = 0
 
     def random_seed(self, size_in_bits):
         """Luo siemenluvun jolla alkuluku generoidaan
@@ -109,42 +112,42 @@ class Prime_tools:
         while p == q:
             q = self.generate_prime()
 
-        n = p * q
+        self.n = p * q
         ph = self.phi(p,q)
-        e = 65537
+        self.e = 65537
 
-        while gcd(e, ph) != 1:
+        while gcd(self.e, ph) != 1:
             p, q = self.generate_prime(), self.generate_prime()
             ph = self.phi(p, q)
 
-        d = calculate_d(e, ph)
-
-        P = (e, n)
-        S = (d, n)
+        self.d = calculate_d(self.e, ph)
 
         #testailua
         print("p:", p)
         print("q:", q)
-        print("Julkisen avaimen ensimmäinen osa: ", n)
+        print("Julkisen avaimen ensimmäinen osa: ", self.n)
         print("phi:", ph)
-        print("d: ", d)
-        print("S:", S)
-        print("P:", P)
+        print("d: ", self.d)
 
-        return [P, S]
+        return 1
 
-    def salaa(self,viesti):
+    def salaa(self,message):
         """Salaa syötetyn viestin käyttäen avainparia. Kesken.
 
         Args:
-            viesti: Salattava viesti.
+            message: Salattava viesti.
         """
-        return viesti
+        message_int = string_to_int(message)
 
-    def pura(self,viesti):
+
+        return message_int
+
+    def pura(self,message_int):
         """Purkaa syötetyn viestin käyttäen avainparia. Kesken.
 
         Args:
-            viesti: Purettava viesti.
+            message_int: Purettava viesti.
         """
-        return viesti
+
+        message = int_to_string(message_int)
+        return message
