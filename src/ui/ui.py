@@ -41,13 +41,13 @@ class UI:
             if (self.avain_on):
                 salattava = input("Syötä salattava viesti:")
                 salattu = self.__prime_tools.salaa(salattava)
-                print("Viesti salattuna: ", salattu)
+                print("Viesti salattuna:", salattu)
             else:
                 print("Ei salausavainta!")
         elif (valinta == "5"):
             if (self.avain_on):
                 purettava = input("Syötä purettava viesti:")
-                print(self.__prime_tools.pura(purettava))
+                print("Purettu viesti:", self.__prime_tools.pura(purettava))
             else:
                 print("Ei purkuavainta!")
         elif (valinta == "6"):

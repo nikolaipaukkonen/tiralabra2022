@@ -1,5 +1,6 @@
 import random
-from sovelluslogiikka.math_tools import gcd, calculate_d, int_to_string, string_to_int
+from telnetlib import ENCRYPT
+from sovelluslogiikka.math_tools import gcd, calculate_d, divide_into_blocks, int_to_string, string_to_int
 
 class Avaingeneraattori:
     def __init__(self, size_in_bits):
@@ -7,7 +8,9 @@ class Avaingeneraattori:
         self.d = 0
         self.e = 0
         self.n = 0
+        self.p, self.q = 0,0
         self.small_primes = self.sieve_of_erastothenes(1500)
+        self.dp, self.dq, self.qinv = 0,0,0
 
     def random_seed(self, size_in_bits):
         """Luo pseudosatunnaisen siemenluvun jolla alkuluku generoidaan
@@ -103,30 +106,39 @@ class Avaingeneraattori:
     def phi(self,p, q):
         return ((p-1)*(q-1))
 
+    def luo_p_ja_q(self):
+        self.p, self.q = self.generate_prime(), self.generate_prime()
+
+        while self.p == self.q:
+            self.q = self.generate_prime() # korjaa omaksi paketikseen
+        
+        return 
+
     def luo_avain(self):
         """Generoi avainparin. kesken. Tullaan eriyttämään erillisiksi
         osiksi.
 
         """
         print("Avaimen koko:", self.__size_in_bits)
-        p, q = self.generate_prime(), self.generate_prime()
+        self.luo_p_ja_q()
 
-        while p == q:
-            q = self.generate_prime()
-
-        self.n = p * q
-        ph = self.phi(p,q)
+        self.n = self.p * self.q
+        ph = self.phi(self.p,self.q)
         self.e = 65537
 
         while gcd(self.e, ph) != 1:
-            p, q = self.generate_prime(), self.generate_prime()
-            ph = self.phi(p, q)
+            self.luo_p_ja_q
+            ph = self.phi(self.p, self.q)
 
         self.d = calculate_d(self.e, ph)
+        # apuluvut chinese remainder algorithmiin
+        self.dp = self.d % (self.p-1)
+        self.dq = self.d % (self.q-1)
+        self.qinv = self.q**-1 % self.p
 
         #testailua
-        print("p:", p)
-        print("q:", q)
+        print("p:", self.p)
+        print("q:", self.q)
         print("e: ", self.e)
         print("n: ", self.n)
         print("phi:", ph)
@@ -140,10 +152,7 @@ class Avaingeneraattori:
         Args:
             message: Salattava viesti.
         """
-        self.msg_size = len(message.encode())
-        int_message = int.from_bytes(message.encode(), "big")
-        encrypted_message = pow(int_message, self.e, self.n)
-
+        encrypted_message = int(message)**self.e % self.n
         return encrypted_message
 
     def pura(self,message_int):
@@ -152,7 +161,8 @@ class Avaingeneraattori:
         Args:
             message_int: Purettava viesti.
         """
-        decrypted_int = pow(int(message_int), self.d, self.n)
-        message = int_to_string(decrypted_int)
-
+        m1 = int(message_int)**self.dp % self.p
+        m2 = int(message_int)**self.dq % self.q
+        h = self.qinv(m1-m2) % self.p
+        message = m2 + h*self.q % (self.n)
         return message

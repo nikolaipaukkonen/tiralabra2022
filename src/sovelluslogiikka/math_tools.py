@@ -58,3 +58,16 @@ def int_to_string(integer_message, max_code=0x110000):
         l.append(chr(integer_message % max_code))
         integer_message = integer_message // max_code
     return ''.join(reversed(l))
+
+def divide_into_blocks(message):
+    inp = message
+    output = []
+    while True:
+        if len(inp) < 30:
+            output.append(inp)
+            break
+        output.append(inp[:30])
+        inp = inp[30:]
+        if len(inp) == 0:
+            break
+    return output
