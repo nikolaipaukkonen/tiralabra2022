@@ -1,10 +1,10 @@
 import unittest
-from sovelluslogiikka.prime_tools import Prime_tools
+from sovelluslogiikka.prime_tools import Avaingeneraattori
 
-class TestPrime_tools(unittest.TestCase):
+class TestAvaingeneraattori(unittest.TestCase):
     def setUp(self):
         print("Test prime_tools")
-        self.prime_tools = Prime_tools(1024)
+        self.prime_tools = Avaingeneraattori(1024)
 
     def test_generate_prime_palauttaa_oikean_pituisen_luvun(self):
         luku = self.prime_tools.generate_prime()

@@ -35,25 +35,26 @@ def calculate_d(e, ph):
 
     return abs(old_s)
 
-def string_to_int(message):
+def string_to_int(message, max_code=0x110000):
     """Muuntaa viestin kokonaisluvuiksi, jotka voidaan salata.
     
         Args:
             message: Muunnettava merkkijono.
     """
 
-    if message == "":
-        return string_to_int(" ")
+    number = 0
+    for e in [ord(c) for c in message]:
+        number = (number * max_code) + e
+    return number
 
-    return int('1' + "".join(list(map((lambda x: str(ord(x)).zfill(3)), message))))
-
-def int_to_string(integer_message):
+def int_to_string(integer_message, max_code=0x110000):
     """Muuntaa kokonaislukumuotoisen viestin merkkijonoksi salauksen purun jälkeen.
     
         Args:
             integer_message: Kokonaislukumuotoinen viesti.
     """
-    i = str(integer_message)[1: ]
-
-    list_of_numbers = [i[3*n:3*(n+1)] for n in range(0, int(len(i)/3))]
-    return "".join(list(map((lambda x: chr(int(x))), list_of_numbers)))
+    l = []
+    while integer_message != 0:
+        l.append(chr(integer_message % max_code))
+        integer_message = integer_message // max_code
+    return ''.join(reversed(l))

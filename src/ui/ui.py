@@ -1,12 +1,12 @@
 #from sovelluslogiikka.math_tools import Math_tools
-from sovelluslogiikka.prime_tools import Prime_tools
+from sovelluslogiikka.prime_tools import Avaingeneraattori
 import sys
 
 class UI:
     def __init__(self):
         syote = int(input("Syötä salausavaimen pituus bitteinä (oletus 1024):"))
-        self.key_len = syote if syote >= 1024 else 1024
-        self.__prime_tools = Prime_tools(self.key_len)
+        self.key_len = syote #if syote >= 1024 else 1024
+        self.__prime_tools = Avaingeneraattori(self.key_len)
         self.avain_on = 0
 
     def start(self):
@@ -40,7 +40,8 @@ class UI:
         elif (valinta == "4"):
             if (self.avain_on):
                 salattava = input("Syötä salattava viesti:")
-                print(self.__prime_tools.salaa(salattava))
+                salattu = self.__prime_tools.salaa(salattava)
+                print("Viesti salattuna: ", salattu)
             else:
                 print("Ei salausavainta!")
         elif (valinta == "5"):

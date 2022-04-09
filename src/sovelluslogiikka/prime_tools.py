@@ -1,15 +1,16 @@
 import random
-from sovelluslogiikka.math_tools import gcd, calculate_d, string_to_int, int_to_string
+from sovelluslogiikka.math_tools import gcd, calculate_d, int_to_string, string_to_int
 
-class Prime_tools:
+class Avaingeneraattori:
     def __init__(self, size_in_bits):
         self.__size_in_bits = size_in_bits
         self.d = 0
         self.e = 0
         self.n = 0
+        self.small_primes = self.sieve_of_erastothenes(1500)
 
     def random_seed(self, size_in_bits):
-        """Luo siemenluvun jolla alkuluku generoidaan
+        """Luo pseudosatunnaisen siemenluvun jolla alkuluku generoidaan
 
         Args:
             size_in_bits: Luvun koko bitteinä.
@@ -28,31 +29,33 @@ class Prime_tools:
         p = 2
         while p * p <= amount:
             if prime[p] is True:
-                for i in range(p*p, amount+1,p):
+                for i in range(p**2, amount+1,p):
                     prime[i] = False
-                p += 1
+            p += 1
+        prime[0] = False
+        prime[1] = False
 
-            for p in range(2, amount+1):
-                if prime[p]:
-                    primes.append(p)
+        for p in range(amount+1):
+            if prime[p]:
+                primes.append(p)
 
         return primes
 
     def easy_possible_prime(self,size_in_bits):
-        """Helppo mahdollisen alkuluvun luonti ja tarkistus
+        """Helppo mahdollisen alkuluvun luonti ja tarkistus jakamalla Erastotheneen
+        seulalla saaduilla pienillä alkuluvuilla.
 
         Args:
             size_in_bits: luvun koko bitteinä.
         """
-        easy_primes = self.sieve_of_erastothenes(1500)
 
         while True:
             possible_prime = self.random_seed(size_in_bits)
 
-            for factor in easy_primes:
+            for factor in self.small_primes:
                 if possible_prime % factor == 0 and factor**2 <= possible_prime:
                     break
-            return possible_prime
+                else: return possible_prime
 
     def rabin_miller(self,possible_prime):
         """Rabin-Millerin testi mahdolliselle alkuluvulle
@@ -105,9 +108,8 @@ class Prime_tools:
         osiksi.
 
         """
-        print(self.__size_in_bits)
-        p = self.generate_prime()
-        q = self.generate_prime()
+        print("Avaimen koko:", self.__size_in_bits)
+        p, q = self.generate_prime(), self.generate_prime()
 
         while p == q:
             q = self.generate_prime()
@@ -125,29 +127,32 @@ class Prime_tools:
         #testailua
         print("p:", p)
         print("q:", q)
-        print("Julkisen avaimen ensimmäinen osa: ", self.n)
+        print("e: ", self.e)
+        print("n: ", self.n)
         print("phi:", ph)
         print("d: ", self.d)
 
         return 1
 
     def salaa(self,message):
-        """Salaa syötetyn viestin käyttäen avainparia. Kesken.
+        """Salaa syötetyn viestin käyttäen avainparia.
 
         Args:
             message: Salattava viesti.
         """
-        message_int = string_to_int(message)
+        self.msg_size = len(message.encode())
+        int_message = int.from_bytes(message.encode(), "big")
+        encrypted_message = pow(int_message, self.e, self.n)
 
-
-        return message_int
+        return encrypted_message
 
     def pura(self,message_int):
-        """Purkaa syötetyn viestin käyttäen avainparia. Kesken.
+        """Purkaa syötetyn viestin käyttäen avainparia.
 
         Args:
             message_int: Purettava viesti.
         """
+        decrypted_int = pow(int(message_int), self.d, self.n)
+        message = int_to_string(decrypted_int)
 
-        message = int_to_string(message_int)
         return message
