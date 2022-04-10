@@ -46,7 +46,7 @@ class UI:
                 print("Ei salausavainta!")
         elif (valinta == "5"):
             if (self.avain_on):
-                purettava = input("Syötä purettava viesti:")
+                purettava = input("Syötä purettava viesti (tyhjä = pura viimeksi salattu):")
                 print("Purettu viesti:", self.__prime_tools.pura(purettava))
             else:
                 print("Ei purkuavainta!")
@@ -55,9 +55,11 @@ class UI:
 
 
     def tuo(self):
-        #tbd   
+        #tbd  
+        print("Ei vielä toteutettu") 
         return 0
 
     def vie(self):
         #tbd
+        print("Ei vielä toteutettu") 
         return 0

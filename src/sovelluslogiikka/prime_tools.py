@@ -1,16 +1,16 @@
 import random
 from telnetlib import ENCRYPT
-from sovelluslogiikka.math_tools import gcd, calculate_d, divide_into_blocks, int_to_string, string_to_int
+from sovelluslogiikka.math_tools import *
 
 class Avaingeneraattori:
     def __init__(self, size_in_bits):
         self.__size_in_bits = size_in_bits
         self.d = 0
-        self.e = 0
+        self.e = 65537
         self.n = 0
         self.p, self.q = 0,0
+        self.ph = 0
         self.small_primes = self.sieve_of_erastothenes(1500)
-        self.dp, self.dq, self.qinv = 0,0,0
 
     def random_seed(self, size_in_bits):
         """Luo pseudosatunnaisen siemenluvun jolla alkuluku generoidaan
@@ -90,7 +90,7 @@ class Avaingeneraattori:
                 return False
         return True
 
-    def generate_prime(self):
+    def luo_alkuluku(self):
         """Alkulukugeneraattori, joka kutsuu muita luokan metodeja
 
         Args:
@@ -103,14 +103,30 @@ class Avaingeneraattori:
             else:
                 return possible_prime
 
-    def phi(self,p, q):
-        return ((p-1)*(q-1))
+    def phi_euler(self,p, q):
+        """Laskee Eulerin phi-funktiolla keskenään jaottomien lukujen määrän purkuavaimen
+        määrittelyä varten.
+        
+        Args:
+            p, q: Kaksi eri suuruista alkulukua
+        """
+        self.ph =(p-1)*(q-1)
+
+        return
+
+    def carmichael_lambda(self, p, q):
+        """Laskee Carmichaelin funktiolla arvon purkuavainta varten.
+
+        Args:
+            p, q: Kaksi eri suuruista alkulukua
+        """
+        return p*q // gcd(p,q)
 
     def luo_p_ja_q(self):
-        self.p, self.q = self.generate_prime(), self.generate_prime()
+        self.p, self.q = self.luo_alkuluku(), self.luo_alkuluku()
 
         while self.p == self.q:
-            self.q = self.generate_prime() # korjaa omaksi paketikseen
+            self.q = self.luo_alkuluku()
         
         return 
 
@@ -123,25 +139,23 @@ class Avaingeneraattori:
         self.luo_p_ja_q()
 
         self.n = self.p * self.q
-        ph = self.phi(self.p,self.q)
-        self.e = 65537
+        self.phi_euler(self.p,self.q)
 
-        while gcd(self.e, ph) != 1:
+        while gcd(self.e, self.ph) != 1:
             self.luo_p_ja_q
-            ph = self.phi(self.p, self.q)
+            self.phi_euler(self.p, self.q)
 
-        self.d = calculate_d(self.e, ph)
-        # apuluvut chinese remainder algorithmiin
-        self.dp = self.d % (self.p-1)
-        self.dq = self.d % (self.q-1)
-        self.qinv = self.q**-1 % self.p
+        self.d = calculate_d(self.e, self.ph)
+        self.dp = self.d%(self.p-1)
+        self.dq = self.d%(self.q-1)
+        self.qinv = invmod(self.q, self.p)
 
         #testailua
         print("p:", self.p)
         print("q:", self.q)
         print("e: ", self.e)
         print("n: ", self.n)
-        print("phi:", ph)
+        print("phi:", self.ph)
         print("d: ", self.d)
 
         return 1
@@ -152,8 +166,10 @@ class Avaingeneraattori:
         Args:
             message: Salattava viesti.
         """
-        encrypted_message = int(message)**self.e % self.n
-        return encrypted_message
+        int_data = string_to_int(message)
+        salattu = pow(int_data, self.e, self.n)
+        self.vika_viesti = salattu
+        return salattu
 
     def pura(self,message_int):
         """Purkaa syötetyn viestin käyttäen avainparia.
@@ -161,8 +177,25 @@ class Avaingeneraattori:
         Args:
             message_int: Purettava viesti.
         """
-        m1 = int(message_int)**self.dp % self.p
-        m2 = int(message_int)**self.dq % self.q
-        h = self.qinv(m1-m2) % self.p
-        message = m2 + h*self.q % (self.n)
+        if message_int == "":
+            print("testi")
+            message_int = int(self.vika_viesti)
+
+        int_data = pow(int(message_int), self.d, self.n)
+        
+        return int_to_string(int_data)
+
+    def pura_nopea(self,message_int):
+        """Purkaa syötetyn viestin avainparilla käyttäen chinese remainder theoremia.
+        
+        Args:
+            message_int: Purettava viesti kokonaislukuna.
+        """
+        m1 = pow(message_int,self.dp, self.p)
+        m2 = pow(message_int, self.dq, self.q)
+        t = m1-m2
+        if t < 0:
+            t+= self.p
+        h = (self.qinv * t) % self.p
+        message = (m2+h*self.q) % self.n
         return message
