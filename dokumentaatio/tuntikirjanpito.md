@@ -8,5 +8,6 @@
 |26.3.  | 5     | Aloitettu ui:n tekeminen.         |
 |27.3.  | 6     | Sovelluslogiikka, ui ja gcd   |
 |6.4. 	| 4	| Sovelluslogiikkaa (d:n laskeminen) |
-|9.4.   | 9 | Salaamisen ja purkamisen toimimattomuuden työstäminen|
-|Yht.	| 38		|	|
+|9.4.   | 9 	| Salaamisen ja purkamisen toimimattomuuden työstäminen|
+|10.4.	| 12	| Perustoiminnallisuuden saattaminen kuntoon. Kommenttien ja testien kirjoitus | 
+|Yht.	| 50		|	|

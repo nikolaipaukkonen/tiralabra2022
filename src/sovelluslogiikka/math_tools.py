@@ -1,35 +1,42 @@
-from turtle import st
-
 
 def gcd(a, b):
     """Lasketaan suurin yhteinen nimittäjä Eukleideen funktiolla.
     Funktio palauttaa suurimman yhteisen nimittäjän. 
 
-        Args:
-            a, b: Verrattavat luvut.
+    Args:
+        a, b: Verrattavat luvut.
     """
     while b:
         a, b = b, a % b
     return a
 
 def lcm(a, b):
-    """kesken"""
+    """Laskee pienimmän yhteisen jaettavan.
+    
+    Args:
+        a, b: Verrattavat luvut.
+    """
     return a // gcd(a, b) * b
 
 
 def calculate_d(e, ph):
-    """Noudatellen https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm löytyvää pseudokoodia.
+    """Laskee purkuavaimen d yksityistä avainta varten. 
     
     Args:
         e: Avainten luontiin tarvittu alkuluku, joka on keskenään jaoton phi:n kanssa   
-        l: Avainten luonnissa kahdesta suuresta alkuluvusta laskettu Carmichaelin funktion lambda"""
+        ph: Avainten luonnissa kahdesta suuresta alkuluvusta laskettu Carmichaelin funktion lambda"""
     g, x, y = extended_gcd(e, ph)
+
     if g != 1:
         raise Exception("Lukua ei ole")
     else:
         return x % ph
 
 def invmod(e, m):
+    """Modulaariaritmetiikan käänteisluku.
+    
+    Args:
+        """
     g, x, y = extended_gcd(e, m)
     assert g == 1
 
@@ -38,6 +45,11 @@ def invmod(e, m):
     return x
 
 def extended_gcd(a, b):
+    """Laajennetun Eukleideen funktion toteutus. 
+    
+    Args:
+        a, b: Verrattavat luvut.
+    """
     old_s, s = 1, 0
     old_t, t = 0, 1
     while b:
@@ -70,15 +82,3 @@ def int_to_string(integer_message, max_code=0x110000):
         l.append(chr(integer_message % max_code))
         integer_message = integer_message // max_code
     return ''.join(reversed(l))
-
-def exp_func(x, y):
-    exp = bin(y)
-    val = x
-    counter_test = 0
-    for i in range(3, len(exp)):
-        print(counter_test)
-        counter_test += 1
-        val = val * val
-        if (exp[i:i+1]=='1'):
-            val = val*x
-    return val

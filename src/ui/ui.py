@@ -1,11 +1,10 @@
-#from sovelluslogiikka.math_tools import Math_tools
 from sovelluslogiikka.prime_tools import Avaingeneraattori
 import sys
 
 class UI:
     def __init__(self):
-        syote = int(input("Syötä salausavaimen pituus bitteinä (oletus 1024):"))
-        self.key_len = syote #if syote >= 1024 else 1024
+        syote = input("Syötä salausavaimen pituus bitteinä (oletus 1024):")
+        self.key_len = int(syote) if syote != "" else 1024
         self.__prime_tools = Avaingeneraattori(self.key_len)
         self.avain_on = 0
 

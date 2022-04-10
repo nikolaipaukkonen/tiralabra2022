@@ -1,5 +1,5 @@
 import random
-from telnetlib import ENCRYPT
+from unittest import TestCase
 from sovelluslogiikka.math_tools import *
 
 class Avaingeneraattori:
@@ -51,7 +51,6 @@ class Avaingeneraattori:
         Args:
             size_in_bits: luvun koko bitteinä.
         """
-
         while True:
             possible_prime = self.random_seed(size_in_bits)
 
@@ -150,7 +149,7 @@ class Avaingeneraattori:
         self.dq = self.d%(self.q-1)
         self.qinv = invmod(self.q, self.p)
 
-        #testailua
+        #testailua, poistetaan lopullisesta versiosta
         print("p:", self.p)
         print("q:", self.q)
         print("e: ", self.e)
@@ -158,7 +157,7 @@ class Avaingeneraattori:
         print("phi:", self.ph)
         print("d: ", self.d)
 
-        return 1
+        return 
 
     def salaa(self,message):
         """Salaa syötetyn viestin käyttäen avainparia.
@@ -178,7 +177,6 @@ class Avaingeneraattori:
             message_int: Purettava viesti.
         """
         if message_int == "":
-            print("testi")
             message_int = int(self.vika_viesti)
 
         int_data = pow(int(message_int), self.d, self.n)
