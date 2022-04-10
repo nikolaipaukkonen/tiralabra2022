@@ -1,5 +1,5 @@
 import unittest
-from sovelluslogiikka.prime_tools import Avaingeneraattori
+from src.sovelluslogiikka.prime_tools import Avaingeneraattori
 
 class TestAvaingeneraattori(unittest.TestCase):
     def setUp(self):

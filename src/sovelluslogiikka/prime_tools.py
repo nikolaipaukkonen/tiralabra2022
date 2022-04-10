@@ -1,6 +1,5 @@
 import random
-from unittest import TestCase
-from sovelluslogiikka.math_tools import *
+from .math_tools import *
 
 class Avaingeneraattori:
     def __init__(self, size_in_bits):
