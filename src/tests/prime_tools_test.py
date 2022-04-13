@@ -20,4 +20,26 @@ class TestAvaingeneraattori(unittest.TestCase):
         testiluku = 102753878333786575683857826242754390887639315929469337484397294120531263673831701664588326518380603701910328930774259368694415405460819393604480081374772613977270118466703727722021192902358406600227638745550165159433408697229662195661488896949704887006228715501336694295416712143282609427849565833913043261090
         self.assertEqual(True, self.prime_tools.rabin_miller(testiluku))
 
+    def test_phi_euler_palauttaaOikein(self):
+        self.assertEqual(self.prime_tools.phi_euler(7, 13), 72)
+
+    def test_salaa(self):
+        message = "testi"
+        self.prime_tools.p = 163
+        self.prime_tools.q = 226
+        self.n = 37001
+        self.ph = 36612
+        self.e = 65537
+        self.d = 1205
+        self.assertEqual(25232, self.prime_tools.salaa(message))
+
+    def test_pura(self):
+        message = 25232
+        self.prime_tools.p = 163
+        self.prime_tools.q = 226
+        self.n = 37001
+        self.ph = 36612
+        self.e = 65537
+        self.d = 1205
+        self.assertEqual("testi", self.prime_tools.pura(message))
     

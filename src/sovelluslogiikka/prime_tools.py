@@ -110,7 +110,7 @@ class Avaingeneraattori:
         """
         self.ph =(p-1)*(q-1)
 
-        return
+        return self.ph
 
     def carmichael_lambda(self, p, q):
         """Laskee Carmichaelin funktiolla arvon purkuavainta varten.
