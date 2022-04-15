@@ -11,4 +11,5 @@
 |9.4.   | 9 	| Salaamisen ja purkamisen toimimattomuuden työstäminen|
 |10.4.	| 12	| Perustoiminnallisuuden saattaminen kuntoon. Kommenttien ja testien kirjoitus |
 |13.4.  | 2     | Testien kirjoittamista ja dokumentointia |
+|15.4.	| 1	| Suorituskyvyn testauksen aloittaminen		|
 |Yht.	| 52		|	|

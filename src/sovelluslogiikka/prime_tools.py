@@ -1,5 +1,6 @@
 import random
 from .math_tools import *
+from datetime import datetime
 
 class Avaingeneraattori:
     def __init__(self, size_in_bits):
@@ -133,6 +134,7 @@ class Avaingeneraattori:
         osiksi.
 
         """
+        start = datetime.now()
         print("Avaimen koko:", self.__size_in_bits)
         self.luo_p_ja_q()
 
@@ -156,6 +158,8 @@ class Avaingeneraattori:
         print("phi:", self.ph)
         print("d: ", self.d)
 
+        print("Avainten generointi kesti, ", datetime.now()-start, "sekuntia.")
+
         return 
 
     def salaa(self,message):
@@ -175,11 +179,14 @@ class Avaingeneraattori:
         Args:
             message_int: Purettava viesti.
         """
+
+        start = datetime.now()
         if message_int == "":
             message_int = int(self.vika_viesti)
 
         int_data = pow(int(message_int), self.d, self.n)
-        
+        print("Viestin purkaminen kesti, ", datetime.now()-start, "sekuntia.")
+
         return int_to_string(int_data)
 
     def pura_nopea(self,message_int):
