@@ -12,4 +12,5 @@
 |10.4.	| 12	| Perustoiminnallisuuden saattaminen kuntoon. Kommenttien ja testien kirjoitus |
 |13.4.  | 2     | Testien kirjoittamista ja dokumentointia |
 |15.4.	| 1	| Suorituskyvyn testauksen aloittaminen		|
-|Yht.	| 52		|	|
+|16.4.  | 2 | Toteutettu alustavat vienti ja tuonti sekä aloitettu suorituskykytestaus  |
+|Yht.	| 54		|	|

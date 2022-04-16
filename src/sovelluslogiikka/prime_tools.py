@@ -184,7 +184,7 @@ class Avaingeneraattori:
         if message_int == "":
             message_int = int(self.vika_viesti)
 
-        int_data = pow(int(message_int), self.d, self.n)
+        int_data = pow(int(message_int), selpoetf.d, self.n)
         print("Viestin purkaminen kesti, ", datetime.now()-start, "sekuntia.")
 
         return int_to_string(int_data)
@@ -203,3 +203,22 @@ class Avaingeneraattori:
         h = (self.qinv * t) % self.p
         message = (m2+h*self.q) % self.n
         return message
+
+    def vie(self):
+        tiedostonimi = input("Anna kirjoitettavan avainparin tiedostonimi:")
+        with open(tiedostonimi, 'w') as f:
+            f.write(str(self.e))
+            f.write("\n")
+            f.write(str(self.d))
+            f.write("\n")
+            f.write(str(self.n))
+            f.write("\n")
+
+    def tuo(self):
+        tiedostonimi = input("Anna luettavan avainparin tiedostonimi:")
+
+        with open(tiedostonimi) as f:
+            lines = f.readlines()
+            self.e = lines[0]
+            self.d = lines[1]
+            self.n = lines[2]

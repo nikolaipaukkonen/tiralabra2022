@@ -1,4 +1,5 @@
 from sovelluslogiikka.prime_tools import Avaingeneraattori
+from sovelluslogiikka.import_export import vie
 import sys
 
 class UI:
@@ -33,9 +34,9 @@ class UI:
             self.__prime_tools.luo_avain()
             self.avain_on = 1
         elif (valinta == "2"):
-            self.vie()
+            self.vie_avain()
         elif (valinta == "3"):
-            self.tuo()
+            self.tuo_avain()
         elif (valinta == "4"):
             if (self.avain_on):
                 salattava = input("Syötä salattava viesti:")
@@ -53,12 +54,11 @@ class UI:
             sys.exit(0)
 
 
-    def tuo(self):
-        #tbd  
-        print("Ei vielä toteutettu") 
+    def tuo_avain(self):
+        self.__prime_tools.tuo()
         return 0
 
-    def vie(self):
-        #tbd
-        print("Ei vielä toteutettu") 
+    def vie_avain(self):
+        self.__prime_tools.vie()
+
         return 0
