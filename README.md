@@ -15,6 +15,7 @@ Toteutan RSA-salausavainten luomisen ja käytön mahdollistavan ohjelman. Osa Ti
 * [Viikko 2](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_2.md)
 * [Viikko 3](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_3.md)
 * [Viikko 4](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_4.md)
+* [Viikko 5](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_5.md)
 
 ## Asennus
 1. Asenna ensin riippuvuudet:
