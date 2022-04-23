@@ -158,7 +158,7 @@ class Avaingeneraattori:
         print("phi:", self.ph)
         print("d: ", self.d)
 
-        print("Avainten generointi kesti, ", datetime.now()-start, "sekuntia.")
+        print("Avainten generointi kesti: ", datetime.now()-start, "sekuntia.")
 
         return 
 
@@ -184,8 +184,8 @@ class Avaingeneraattori:
         if message_int == "":
             message_int = int(self.vika_viesti)
 
-        int_data = pow(int(message_int), selpoetf.d, self.n)
-        print("Viestin purkaminen kesti, ", datetime.now()-start, "sekuntia.")
+        int_data = pow(int(message_int), self.d, self.n)
+        print("Viestin purkaminen kesti: ", datetime.now()-start, "sekuntia.")
 
         return int_to_string(int_data)
 
@@ -205,6 +205,9 @@ class Avaingeneraattori:
         return message
 
     def vie(self):
+        """Vie luodun avaimen erilliseen tekstitiedostoon.
+        
+        """
         tiedostonimi = input("Anna kirjoitettavan avainparin tiedostonimi:")
         with open(tiedostonimi, 'w') as f:
             f.write(str(self.e))
@@ -215,6 +218,9 @@ class Avaingeneraattori:
             f.write("\n")
 
     def tuo(self):
+        """Tuo aiemmin luodun avaimen ohjelmaan.
+        
+        """
         tiedostonimi = input("Anna luettavan avainparin tiedostonimi:")
 
         with open(tiedostonimi) as f:

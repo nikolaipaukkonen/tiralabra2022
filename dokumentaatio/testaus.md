@@ -6,7 +6,7 @@ Ohjelmalle toteutetaan yksikkötestaus. Se ajetaan komennolla
 poetry run invoke test
 ```
 Tämän hetkinen testikattavuus:
-![](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/2022_03_26_coverage.png)
+![](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/2022_04_23_coverage.png)
 
 ## Suorituskykytestit
 
@@ -15,7 +15,7 @@ Ohjelman osille on suoritettu manuaalisia suorituskykytestejä. Operaatio on tot
 Viikon 5 tilanne avainten luonnissa oli seuraava:
 
 Avaimen pituus bitteinä | Keskiarvo 10:llä kerralla |
-512     | 1.503
+512     | 1.503     |
 1024    | 13.970    |
 2048    | 114.510   |
 

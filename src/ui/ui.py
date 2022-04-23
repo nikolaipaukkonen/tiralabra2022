@@ -1,5 +1,4 @@
 from sovelluslogiikka.prime_tools import Avaingeneraattori
-from sovelluslogiikka.import_export import vie
 import sys
 
 class UI:
