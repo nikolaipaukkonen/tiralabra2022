@@ -1,15 +1,16 @@
 import random
 from .math_tools import *
+import os.path
 from datetime import datetime
 
 class Avaingeneraattori:
     def __init__(self, size_in_bits):
         self.__size_in_bits = size_in_bits
-        self.d = 0
-        self.e = 65537
-        self.n = 0
-        self.p, self.q = 0,0
-        self.ph = 0
+        self.private_exponent = 0
+        self.public_exponent = 65537
+        self.modulus_n = 0
+        self.prime_p, self.prime_q = 0,0
+        self.carmichaelin_luku = 0
         self.small_primes = self.sieve_of_erastothenes(1500)
 
     def random_seed(self, size_in_bits):
@@ -109,9 +110,9 @@ class Avaingeneraattori:
         Args:
             p, q: Kaksi eri suuruista alkulukua
         """
-        self.ph =(p-1)*(q-1)
+        self.carmichaelin_luku =(p-1)*(q-1)
 
-        return self.ph
+        return self.carmichaelin_luku
 
     def carmichael_lambda(self, p, q):
         """Laskee Carmichaelin funktiolla arvon purkuavainta varten.
@@ -122,10 +123,10 @@ class Avaingeneraattori:
         return p*q // gcd(p,q)
 
     def luo_p_ja_q(self):
-        self.p, self.q = self.luo_alkuluku(), self.luo_alkuluku()
+        self.prime_p, self.prime_q = self.luo_alkuluku(), self.luo_alkuluku()
 
-        while self.p == self.q:
-            self.q = self.luo_alkuluku()
+        while self.prime_p == self.prime_q:
+            self.prime_q = self.luo_alkuluku()
         
         return 
 
@@ -138,25 +139,25 @@ class Avaingeneraattori:
         print("Avaimen koko:", self.__size_in_bits)
         self.luo_p_ja_q()
 
-        self.n = self.p * self.q
-        self.phi_euler(self.p,self.q)
+        self.modulus_n = self.prime_p * self.prime_q
+        self.phi_euler(self.prime_p,self.prime_q)
 
-        while gcd(self.e, self.ph) != 1:
+        while gcd(self.public_exponent, self.carmichaelin_luku) != 1:
             self.luo_p_ja_q
-            self.phi_euler(self.p, self.q)
+            self.phi_euler(self.prime_p, self.prime_q)
 
-        self.d = calculate_d(self.e, self.ph)
-        self.dp = self.d%(self.p-1)
-        self.dq = self.d%(self.q-1)
-        self.qinv = invmod(self.q, self.p)
+        self.private_exponent = calculate_d(self.public_exponent, self.carmichaelin_luku)
+        self.private_exponentp = self.private_exponent%(self.prime_p-1)
+        self.private_exponentq = self.private_exponent%(self.prime_q-1)
+        self.prime_qinv = invmod(self.prime_q, self.prime_p)
 
         #testailua, poistetaan lopullisesta versiosta
-        print("p:", self.p)
-        print("q:", self.q)
-        print("e: ", self.e)
-        print("n: ", self.n)
-        print("phi:", self.ph)
-        print("d: ", self.d)
+        print("p:", self.prime_p)
+        print("q:", self.prime_q)
+        print("e: ", self.public_exponent)
+        print("n: ", self.modulus_n)
+        print("phi:", self.carmichaelin_luku)
+        print("d: ", self.private_exponent)
 
         print("Avainten generointi kesti: ", datetime.now()-start, "sekuntia.")
 
@@ -169,7 +170,7 @@ class Avaingeneraattori:
             message: Salattava viesti.
         """
         int_data = string_to_int(message)
-        salattu = pow(int_data, self.e, self.n)
+        salattu = pow(int_data, self.public_exponent, self.modulus_n)
         self.vika_viesti = salattu
         return salattu
 
@@ -184,7 +185,7 @@ class Avaingeneraattori:
         if message_int == "":
             message_int = int(self.vika_viesti)
 
-        int_data = pow(int(message_int), self.d, self.n)
+        int_data = pow(int(message_int), self.private_exponent, self.modulus_n)
         print("Viestin purkaminen kesti: ", datetime.now()-start, "sekuntia.")
 
         return int_to_string(int_data)
@@ -195,13 +196,13 @@ class Avaingeneraattori:
         Args:
             message_int: Purettava viesti kokonaislukuna.
         """
-        m1 = pow(message_int,self.dp, self.p)
-        m2 = pow(message_int, self.dq, self.q)
+        m1 = pow(message_int,self.private_exponentp, self.prime_p)
+        m2 = pow(message_int, self.private_exponentq, self.prime_q)
         t = m1-m2
         if t < 0:
-            t+= self.p
-        h = (self.qinv * t) % self.p
-        message = (m2+h*self.q) % self.n
+            t+= self.prime_p
+        h = (self.prime_qinv * t) % self.prime_p
+        message = (m2+h*self.prime_q) % self.modulus_n
         return message
 
     def vie(self):
@@ -210,11 +211,11 @@ class Avaingeneraattori:
         """
         tiedostonimi = input("Anna kirjoitettavan avainparin tiedostonimi:")
         with open(tiedostonimi, 'w') as f:
-            f.write(str(self.e))
+            f.write(str(self.public_exponent))
             f.write("\n")
-            f.write(str(self.d))
+            f.write(str(self.private_exponent))
             f.write("\n")
-            f.write(str(self.n))
+            f.write(str(self.modulus_n))
             f.write("\n")
 
     def tuo(self):
@@ -222,9 +223,15 @@ class Avaingeneraattori:
         
         """
         tiedostonimi = input("Anna luettavan avainparin tiedostonimi:")
+        if os.path.exists(tiedostonimi):
+            with open(tiedostonimi) as f:
+                lines = f.readlines()
+                self.public_exponent = int(lines[0])
+                self.private_exponent = int(lines[1])
+                self.modulus_n = int(lines[2])
+            print(tiedostonimi, "tuotu.")
+            return True
 
-        with open(tiedostonimi) as f:
-            lines = f.readlines()
-            self.e = lines[0]
-            self.d = lines[1]
-            self.n = lines[2]
+        else: 
+            print("Tiedostoa ei löydy.")
+            return False

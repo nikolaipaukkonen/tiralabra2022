@@ -54,7 +54,8 @@ class UI:
 
 
     def tuo_avain(self):
-        self.__prime_tools.tuo()
+        if self.__prime_tools.tuo():
+            self.avain_on = 1
         return 0
 
     def vie_avain(self):

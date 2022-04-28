@@ -16,6 +16,7 @@ Toteutan RSA-salausavainten luomisen ja käytön mahdollistavan ohjelman. Osa Ti
 * [Viikko 3](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_3.md)
 * [Viikko 4](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_4.md)
 * [Viikko 5](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_5.md)
+* [viikko 6](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_6.md)
 
 ## Asennus
 Ohjelma vaatii toimiakseen Poetryn, jonka asennusohjeet ovat [täällä](https://ohjelmistotekniikka-hy.github.io/python/viikko2#poetry-ja-riippuvuuksien-hallinta).

@@ -13,5 +13,6 @@
 |13.4.  | 2     | Testien kirjoittamista ja dokumentointia |
 |15.4.	| 1	| Suorituskyvyn testauksen aloittaminen		|
 |16.4.  | 2 | Toteutettu alustavat vienti ja tuonti sekä aloitettu suorituskykytestaus  |
-|23.4.  | 1 | Siistitty koodia ja tehty lisää yksikkötestausta. |
-|Yht.	| 55		|	|
+|23.4.  | 2 | Siistitty koodia ja tehty lisää yksikkötestausta. |
+|28.4.  | 5 | Korjattu virhetilanteita ja tuontifunktiota. |
+|Yht.	| 61		|	|
