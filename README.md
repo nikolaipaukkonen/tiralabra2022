@@ -18,6 +18,8 @@ Toteutan RSA-salausavainten luomisen ja käytön mahdollistavan ohjelman. Osa Ti
 * [Viikko 5](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/viikkoraportti_5.md)
 
 ## Asennus
+Ohjelma vaatii toimiakseen Poetryn, jonka asennusohjeet ovat [täällä](https://ohjelmistotekniikka-hy.github.io/python/viikko2#poetry-ja-riippuvuuksien-hallinta).
+
 1. Asenna ensin riippuvuudet:
 ```bash
 ṕoetry install
