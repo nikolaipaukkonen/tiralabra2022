@@ -15,4 +15,5 @@
 |16.4.  | 2 | Toteutettu alustavat vienti ja tuonti sekä aloitettu suorituskykytestaus  |
 |23.4.  | 2 | Siistitty koodia ja tehty lisää yksikkötestausta. |
 |28.4.  | 5 | Korjattu virhetilanteita ja tuontifunktiota. |
-|Yht.	| 61		|	|
+|10.5.	| 2 | Tehty dokumentaatiota ja käyty läpi koodin logiikkaa. |
+|Yht.	| 63		|	|

@@ -2,7 +2,7 @@
 Kurssityönä kirjoittamani ohjelma toteuttaa RSA-salausavainten luomisen sekä niiden käytön purkamisessa ja salauksessa. Ohjelma on toteutettu Pythonin versiolla 3.8. 
 
 ## Ohjelman rakenne
-Tällaisenaan ohjelma on jaettu kolmeen pääosaan: käyttöliittymä (ui.py), alkulukuihin ja avainten generointiin keskittyvään luokkaan (prime_tools.py) sekä muihin laskutoimituksiin keskittyvään luokkaan (math_tools.py). Rakennetta tullaan refaktoroimaan rajusti ymmärrettävyyden lisäämiseksi. 
+Tällaisenaan ohjelma on jaettu kolmeen pääosaan: käyttöliittymä (ui.py), alkulukuihin ja avainten generointiin keskittyvään luokkaan (prime_tools.py) sekä muihin laskutoimituksiin keskittyvään luokkaan (math_tools.py). Rakennetta tulisi refaktoroida ymmärrettävyyden lisäämiseksi. 
 
 ## Aika- ja tilavaativuudet
 

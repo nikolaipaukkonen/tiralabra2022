@@ -84,7 +84,7 @@ class Avaingeneraattori:
                 return True
 
         amountOfTests = 10 # kasvata todennäköisyyttä
-        for i in range(amountOfTests):
+        for _ in range(amountOfTests):
             testable = random.randrange(2, possible_prime)
             if testPart(testable):
                 return False
