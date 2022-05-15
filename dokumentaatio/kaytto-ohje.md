@@ -12,6 +12,7 @@ Ohjelma vaatii toimiakseen Pythonin (versio 3.8 tai uudempi) ja paketinhallintaj
 2. Käynnistä sovelluksen komentorivikäyttöliittymä:
 ```bash
 poetry run invoke start
+```
 
 ## Salausavainten generointi
 Ohjelma kysyy käynnistyessään luotavan avaimen koon biteissä (suositus vähintään 1024 bittiä). Käyttöliittymässä valitsemalla vaihtoehdon "1" ohjelma generoi avaimet ja tulostaa sen jälkeen sen komponentit sekä niiden luomiseen kestäneen ajan. Tämän jälkeen avainpari on käynnissä olevan ohjelman muistissa, mutta ei tallennu sellaisenaan mihinkään, mikäli ohjelman suoritus keskeytetään.
