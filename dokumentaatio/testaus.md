@@ -6,7 +6,7 @@ Ohjelmalle toteutetaan yksikkötestaus. Se ajetaan komennolla
 poetry run invoke test
 ```
 Tämänhetkinen testikattavuus:
-![](https://github.com/nikolaipaukkonen/tiralabra2022/blob/main/dokumentaatio/2022-05_15_coverage.png)
+![](https://raw.githubusercontent.com/nikolaipaukkonen/tiralabra2022/main/dokumentaatio/2022-05-15_coverage.png)
 
 Testit ovat fokusoituneet funktoiden ja ohjelman toimintojen oikeellisuuteen. Kokonaisuutena yksikkötestit saavuttavat 82% kattavuuden ja ovat siten vaillinaiset. Suurinta osaa ominaisuuksista testataan, mutta en ehtinyt toteuttaa kaikkia testejä. Erityisesti purkaminen, salaaminen, vieminen ja tuominen puuttuvat. Avainten luominen testataan kuitenkin kattavasti. 
 
