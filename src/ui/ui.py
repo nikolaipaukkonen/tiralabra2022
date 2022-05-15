@@ -54,11 +54,17 @@ class UI:
 
 
     def tuo_avain(self):
+        """Kutsuu prime_toolsin tuo-funktiota
+        
+        """
         if self.__prime_tools.tuo():
             self.avain_on = 1
         return 0
 
     def vie_avain(self):
+        """Kutsuu prime_toolsin vie_funktiota
+        
+        """
         self.__prime_tools.vie()
 
         return 0

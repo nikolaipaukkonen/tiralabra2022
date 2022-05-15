@@ -123,6 +123,9 @@ class Avaingeneraattori:
         return p*q // gcd(p,q)
 
     def luo_p_ja_q(self):
+        """Luo kaksi alkulukua avainten luontia varten.
+        
+        """
         self.prime_p, self.prime_q = self.luo_alkuluku(), self.luo_alkuluku()
 
         while self.prime_p == self.prime_q:
@@ -131,8 +134,7 @@ class Avaingeneraattori:
         return 
 
     def luo_avain(self):
-        """Generoi avainparin. kesken. Tullaan eriyttämään erillisiksi
-        osiksi.
+        """Generoi avainparin. Tämä funktio pitäisi refaktoroida raskaasti.
 
         """
         start = datetime.now()

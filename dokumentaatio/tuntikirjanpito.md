@@ -16,4 +16,5 @@
 |23.4.  | 2 | Siistitty koodia ja tehty lisää yksikkötestausta. |
 |28.4.  | 5 | Korjattu virhetilanteita ja tuontifunktiota. |
 |10.5.	| 2 | Tehty dokumentaatiota ja käyty läpi koodin logiikkaa. |
-|Yht.	| 63		|	|
+|15.5.  | 2 | Muutamia lisätestejä ja dokumentaatiota sekä final release |
+|Yht.	| 65		|	|

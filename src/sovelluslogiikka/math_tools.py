@@ -35,7 +35,6 @@ def calculate_d(e, ph):
 def invmod(e, m):
     """Modulaariaritmetiikan käänteisluku.
     
-    Args:
         """
     g, x, y = extended_gcd(e, m)
     assert g == 1
